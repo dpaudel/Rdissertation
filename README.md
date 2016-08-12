@@ -3,6 +3,7 @@ Codes in R used for Dissertation
 
 <h5>Plot % of uniquely mapped NG reads to PM genome</h5>
 ```
+setwd("C:/Users/Dev Paudel/Desktop/stacks")
 data1<-read.csv("forR.csv")
 library(ggplot2)
 colnames(data1)
