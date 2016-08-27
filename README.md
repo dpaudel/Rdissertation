@@ -1,6 +1,52 @@
 # Rdissertation
 Codes in R used for Dissertation
 
+<h5>Plots of various generations with plant heigth (for 2nd committee meeting) </h5>
+```
+setwd("C:/Users/Dev Paudel/Dropbox/2_UFlabAltpeter/phenoytping_data")
+raw<-read.csv("data_all.csv")
+library(dplyr)
+dim(raw)
+colnames(raw)
+str(raw)
+#Extract only relevant data
+data<-raw[,8:18]
+theme_set(theme_gray(base_size = 18))
+
+#Subset for 787 and plot
+sub787<- subset(data,Trt=="787" | Trt =="787_S2" | Trt=="787_S3"| Trt=="787_S4")
+p<-ggplot(data=sub787, aes(x=Trt, y=Height_cm))
+p+geom_boxplot()+ geom_jitter(width=0.2)+
+  theme_grey(base_size = 18)+
+  xlab("Generation of 787")+
+  ylab("Plant Height (cm)")
+
+
+#Subset for 603 and plot
+sub603<- subset(data, Trt=="603"| Trt=="603_S2"|Trt=="603_S3"|Trt=="603_S4")
+q<-ggplot(data=sub603, aes(x=Trt, y=Height_cm))
+q+geom_boxplot()+ geom_jitter(width=0.2)+
+  theme_grey(base_size = 18)+
+  xlab("Generation of 603")+
+  ylab("Plant height (cm)")
+
+#Subset for MS787 and plot
+sub_ms787 <- subset(data, Trt=="MS787_S1"|Trt=="MS787_S2"|Trt=="MS787_S3")
+r<-ggplot(data=sub_ms787, aes(x=Trt, y=Height_cm))
+r+geom_boxplot()+geom_jitter(width=0.2)+
+  theme_grey(base_size = 18)+
+  xlab("Generation of back-crosses")+
+  ylab("Plant height (cm)")
+
+#Subset for Schank
+sub_schank<-subset(data, Trt=="Schank"| Trt=="Schank_S1")
+s<-ggplot(data=sub_schank,aes(x=Trt, y=Height_cm))
+s+geom_boxplot()+geom_jitter(width=0.2)+
+  theme_grey(base_size=18)+
+  xlab("Generation of Schank")+
+  ylab("Plant height (cm)")
+```
+
 <h5>Plot % of uniquely mapped NG reads to PM genome</h5>
 ```
 setwd("C:/Users/Dev Paudel/Desktop/stacks")
