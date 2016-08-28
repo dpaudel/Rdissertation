@@ -1,6 +1,20 @@
 # Rdissertation
 Codes in R used for Dissertation
-
+<h5>Merge all data for linkage map</h5>
+```
+setwd("C:/Users/Dev Paudel/Desktop/vcf/filter_48")
+library(plyr)
+dtassel<-read.table("dtassel_final.txt", header=T)
+dcrop<-read.table("dcrop_final.txt",header=T)
+crop<-read.table("crop_final.txt", header=T)
+samtools<-read.table("samtools_final.txt", header=T)
+gatk<-read.table("gatk_final.txt", header=T)
+tassel<-read.table("tassel_final.txt", header=T)
+combined<-rbind.fill(dtassel,dcrop,crop,samtools,gatk,tassel)
+dim(combined)
+head(combined)
+write.csv(combined, file="combined_file.csv")
+```
 <h5>Plots of various generations with plant heigth (for 2nd committee meeting) </h5>
 ```
 setwd("C:/Users/Dev Paudel/Dropbox/2_UFlabAltpeter/phenoytping_data")
