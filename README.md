@@ -1,6 +1,44 @@
 # Rdissertation
 
 Codes in R used for Dissertation
+<h5>Plots & summary for 2016 phenotyping</h5>
+
+```
+setwd("C:/Users/dpaudel/Dropbox/2_UFlabAltpeter/2016 phenotyping")
+flower16<-read.csv("floweringdate_2016.csv", header=T)
+library(agricolae)
+library(plyr)
+head(flower16)
+str(flower16)
+plot(flower16$DAP,flower16$Line)
+myaov1<-lm(flower16$DAP~flower16$Line)
+summary(myaov1)
+#plot(myaov1)
+cdata <- ddply(flower16, c("Line"), summarise,mean = mean(DAP),sd=sd(DAP),se= sd/sqrt(3))
+cdata
+plot(hist(cdata$mean), col="blue", main="Histogram for first flowering date 2016 mapping population", xlab="Days after planting")
+abline(v=373.33, lwd=2,col="red" ); text(371, 30, "N122")
+abline(v=420, lwd=2,col="green" ); text(418, 30, "N190")
+#write.csv(cdata, file="summary2016.csv")
+
+#For germplasm collection
+germ16<-read.csv("flowering_germplasm2016.csv",header=T)
+myaov2<-lm(germ16$DAP~germ16$Genotype)
+summary(myaov2)
+plot(myaov2)
+#Remove NA for getting true means
+germ16_na<-na.omit(germ16)
+gdata <- ddply(germ16_na, c("Genotype"), summarise,mean = mean(DAP),sd=sd(DAP),se= sd/sqrt(3))
+head(gdata)
+#View(gdata)
+plot(hist(gdata$mean), col="blue", main="Histgram of first flowering date 2016 - Germplasm", xlab="Days after planting")
+abline(v=464, lwd=2,col="red" ); text(462,20, "N122", col="red")
+abline(v=486, lwd=2,col="green" ); text(488, 20, "N190", col="green")
+#write.csv(gdata, file="summary2016_germplasm.csv")
+#using aggregate to group data
+aggregate(germ16_na$DAP, by=list(germ16_na$Genotype), FUN=function(x)c(mean=mean(x),sd=sd(x)))
+
+```
 
 <h5>Merge all data for linkage map</h5>
 
