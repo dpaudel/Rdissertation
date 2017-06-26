@@ -168,3 +168,26 @@ colnames(l_free)<-c("free_chr","free_pos","free_ref","free_alt","Locus")
 #Extract common snps
 View(merge(l_free, l_sam, by="Locus"))
 ```
+
+<h5>Summarise data of 2012 and 2013 phenotypes</h5>
+
+```
+
+#For 2012 data
+flower12<-read.csv("flowering_2012_14.csv", header=T)
+head(flower12)
+str(flower12)
+myaov12<-lm(flower12$DAP2012~flower12$Line)
+summary(myaov12)
+colnames(flower12)
+summary12<-aggregate(flower12$DAP2012, by=list(flower12$Line), FUN=function(x)c(mean=mean(x),sd=sd(x)))
+#write.csv(summary12, file="summary2012.csv")
+
+#For 2013 data
+
+myaov13<-lm(flower12$DAP2013~flower12$Line)
+summary(myaov13)
+summary13<-aggregate(flower12$DAP2013, by=list(flower12$Line), FUN=function(x)c(mean=mean(x),sd=sd(x)))
+write.csv(summary13, file="summary2013.csv")
+```
+
